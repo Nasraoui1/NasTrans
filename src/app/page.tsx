@@ -24,9 +24,6 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <div className="inline-block px-4 py-1.5 rounded-full border border-brand-primary/20 bg-brand-primary/5 text-brand-primary text-sm font-bold tracking-wider uppercase mb-2">
-              Transitaire M.F. 633802 X/A/M/000
-            </div>
             <h1 className="text-5xl md:text-7xl font-bold font-heading leading-tight text-slate-900">
               Nas-Trans <br />
               <span className="text-brand-primary">
@@ -112,14 +109,32 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 space-y-4"
+        >
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-900">Pourquoi Choisir Nas-Trans ?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Une expertise reconnue depuis 1999 dans le dédouanement et le transit international.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: { staggerChildren: 0.2 }
+            }
+          }}
+          className="grid md:grid-cols-3 gap-8"
+        >
           {[
             {
               title: "Formalités Douanières",
@@ -143,24 +158,37 @@ export default function Home() {
               bgColor: "bg-amber-50"
             },
           ].map((feature, index) => (
-            <Card key={index} className="group cursor-pointer hover:shadow-lg hover:-translate-y-1">
-              <div className={`w-14 h-14 rounded-xl ${feature.bgColor} flex items-center justify-center mb-6 transition-transform duration-300`}>
-                <feature.icon className={`w-8 h-8 ${feature.color}`} />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-brand-primary transition-colors">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
-                {feature.description}
-              </p>
-            </Card>
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+            >
+              <Card className="group cursor-pointer hover:shadow-lg hover:-translate-y-1 h-full">
+                <div className={`w-14 h-14 rounded-xl ${feature.bgColor} flex items-center justify-center mb-6 transition-transform duration-300`}>
+                  <feature.icon className={`w-8 h-8 ${feature.color}`} />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-brand-primary transition-colors">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {feature.description}
+                </p>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 md:px-6 py-20">
-        <div className="relative rounded-3xl overflow-hidden bg-brand-primary text-white p-12 text-center shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative rounded-3xl overflow-hidden bg-brand-primary text-white p-12 text-center shadow-2xl"
+        >
           <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10" />
-          {/* You might want a subtle pattern or just a clean gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-brand-primary to-blue-700" />
 
           <div className="relative z-10 space-y-6">
@@ -177,7 +205,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
