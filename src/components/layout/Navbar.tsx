@@ -57,11 +57,7 @@ export default function Navbar() {
                             )}
                         </Link>
                     ))}
-                    <Link href="/contact">
-                        <Button size="sm" variant="outline">
-                            Devis Gratuit
-                        </Button>
-                    </Link>
+
                 </div>
 
                 {/* Mobile Toggle */}
@@ -98,11 +94,7 @@ export default function Navbar() {
                                     {link.name}
                                 </Link>
                             ))}
-                            <Link href="/contact" onClick={() => setIsOpen(false)}>
-                                <Button className="w-full">
-                                    Devis Gratuit
-                                </Button>
-                            </Link>
+
                         </div>
                     </motion.div>
                 )}

@@ -49,7 +49,7 @@ export default function ServicesPage() {
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 10 },
         show: { opacity: 1, y: 0 }
     };
 
@@ -59,7 +59,7 @@ export default function ServicesPage() {
                 {/* Header */}
                 <div className="text-center mb-16 space-y-4">
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-6xl font-bold font-heading text-slate-900"
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                         Nos Services
                     </motion.h1>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.6 }}
                         className="text-gray-600 max-w-2xl mx-auto text-lg"
@@ -113,7 +113,7 @@ export default function ServicesPage() {
                 {/* Process Section */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}

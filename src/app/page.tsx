@@ -188,7 +188,6 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="relative rounded-3xl overflow-hidden bg-brand-primary text-white p-12 text-center shadow-2xl"
         >
-          <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-primary to-blue-700" />
 
           <div className="relative z-10 space-y-6">

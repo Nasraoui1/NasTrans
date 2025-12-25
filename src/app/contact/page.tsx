@@ -59,7 +59,7 @@ export default function ContactPage() {
                 <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
                     {/* Contact Info */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="space-y-8"
@@ -93,7 +93,7 @@ export default function ContactPage() {
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 + (i * 0.1) }}
                                 >
@@ -131,7 +131,7 @@ export default function ContactPage() {
 
                     {/* Contact Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >

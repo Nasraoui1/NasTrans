@@ -136,9 +136,6 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="relative h-[700px] w-full rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-blue-900 shadow-2xl hidden md:block"
                     >
-                        <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10 mix-blend-overlay"></div>
-
-                        {/* Abstract Shapes */}
                         <div className="absolute top-[-20%] right-[-20%] w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-[100px] animate-pulse-slow"></div>
                         <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-indigo-500/20 blur-[80px]"></div>
 
