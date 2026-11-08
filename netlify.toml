@@ -1,0 +1,8 @@
+# Netlify détecte Next.js automatiquement (adaptateur OpenNext) :
+# pages statiques + route /api/contact en fonction serverless.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
