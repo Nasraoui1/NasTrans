@@ -2,7 +2,7 @@
 export const site = {
   name: "Nas-Trans Tunisie SARL",
   shortName: "Nas-Trans",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.nastrans.tn",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.nas-trans.com",
   description:
     "Commissionnaire en douane et transitaire à Tunis depuis 1999 : formalités douanières, commerce extérieur, dédouanement et livraison sur tout le territoire tunisien.",
   foundingYear: 1999,
