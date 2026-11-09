@@ -1,157 +1,93 @@
-"use client";
+import type { Metadata } from "next";
+import PageHeader from "@/components/sections/PageHeader";
+import ContactBand from "@/components/sections/ContactBand";
+import { services, site, yearsOfExperience } from "@/lib/site";
 
-import { motion } from "framer-motion";
-import { DocumentTextIcon, TruckIcon, ShieldCheckIcon, CubeTransparentIcon } from "@heroicons/react/24/outline";
-import { ButtonLink } from "@/components/ui/Button";
-import { site, yearsOfExperience } from "@/lib/site";
+export const metadata: Metadata = {
+    title: "À propos de Nas-Trans Tunisie",
+    description: `${site.name}, commissionnaire en douane et transitaire à Tunis depuis ${site.foundingYear} : notre histoire, nos engagements et notre fiche d’entreprise.`,
+    alternates: { canonical: "/about" },
+};
+
+const commitments = [
+    {
+        title: "Efficacité et fiabilité",
+        desc: "Une maîtrise des procédures douanières pour sécuriser vos marchandises de l’import à l’export, sans surprise ni retard.",
+    },
+    {
+        title: "Rapidité de traitement",
+        desc: "Des processus rodés et une équipe réactive pour réduire vos délais de dédouanement.",
+    },
+    {
+        title: "Prise en charge complète",
+        desc: "Régimes suspensifs, admission temporaire et formalités administratives complexes : nous gérons le dossier en entier.",
+    },
+];
 
 export default function AboutPage() {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0 }
-    };
+    const facts = [
+        { k: "Raison sociale", v: site.name },
+        { k: "Forme juridique", v: "Société à responsabilité limitée (SARL)" },
+        { k: "Activité", v: `${site.activity}, commerce extérieur` },
+        { k: "Création", v: String(site.foundingYear) },
+        { k: "Siège", v: `${site.address.street}, ${site.address.postalCode} ${site.address.city}` },
+        { k: "Zone d’intervention", v: "Tout le territoire tunisien" },
+        { k: "Téléphone", v: site.phone.label },
+        { k: "Email", v: site.emails[0] },
+    ];
 
     return (
-        <div className="pt-28 pb-20 bg-slate-50 min-h-screen">
-            {/* Hero */}
-            <section className="container mx-auto px-4 md:px-6 mb-24">
-                <div className="max-w-4xl mx-auto text-center space-y-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className="inline-block px-4 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-brand-primary text-sm font-bold tracking-wider uppercase mb-4">
-                            Depuis {site.foundingYear}
-                        </div>
-                        <h1 className="text-4xl md:text-6xl font-bold font-heading text-slate-900 leading-tight">
-                            L’Excellence en <span className="text-brand-primary">Douane & Transit</span>
-                        </h1>
-                    </motion.div>
+        <>
+            <PageHeader crumbs={[{ name: "À propos", href: "/about" }]} title={`Au service des importateurs depuis ${site.foundingYear}`}>
+                {site.name} est un commissionnaire en douane et transitaire installé au centre de Tunis.
+            </PageHeader>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        className="text-xl text-gray-600 leading-relaxed space-y-6 text-justify md:text-center max-w-3xl mx-auto"
-                    >
-                        <p>
-                            <strong>Nas-Trans Tunisie SARL</strong> est votre partenaire stratégique en logistique depuis plus de {yearsOfExperience} ans. Constituée sous la loi N° 93 120, nous avons bâti notre réputation sur une expertise sans faille et une connaissance approfondie des rouages du commerce international.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+            <div className="wrap grid gap-16 py-16 md:py-24 lg:grid-cols-[1.3fr_1fr]">
+                <section className="space-y-5 text-lg leading-relaxed max-w-[62ch]">
+                    <h2 className="display text-[1.9rem] md:text-[2.3rem] mb-2">Notre métier</h2>
+                    <p>
+                        Depuis {yearsOfExperience} ans, Nas-Trans accomplit pour le compte des entreprises les formalités douanières
+                        et de commerce extérieur liées à leurs importations et exportations. Constituée sous la loi n° 93-120, la
+                        société a bâti sa réputation sur une connaissance approfondie des procédures et de la réglementation tunisiennes.
+                    </p>
+                    <p>
+                        Plus qu’un simple transitaire, nous agissons comme le prolongement de votre entreprise : nous anticipons
+                        les exigences réglementaires pour que vos marchandises passent la douane sans blocage, puis nous les
+                        acheminons jusqu’à vos locaux.
+                    </p>
+                    <p>
+                        Nos services couvrent {services.map((s) => s.title.toLowerCase()).join(", ").replace(/, ([^,]*)$/, " et $1")}.
+                    </p>
+                </section>
 
-            {/* Key Stats / Trust Indicators */}
-            <motion.section
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mb-24"
-            >
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center bg-white rounded-2xl p-12 shadow-sm border border-slate-100">
-                        <div className="space-y-2">
-                            <div className="text-4xl font-bold text-brand-primary">{yearsOfExperience}+</div>
-                            <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Années d’expérience</div>
-                        </div>
-                        <div className="space-y-2 relative md:after:content-[''] md:after:absolute md:after:right-0 md:after:top-1/2 md:after:-translate-y-1/2 md:after:h-12 md:after:w-px md:after:bg-slate-100 md:before:content-[''] md:before:absolute md:before:left-0 md:before:top-1/2 md:before:-translate-y-1/2 md:before:h-12 md:before:w-px md:before:bg-slate-100">
-                            <div className="text-4xl font-bold text-slate-900">100%</div>
-                            <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Conformité Douanière</div>
-                        </div>
-                        <div className="space-y-2">
-                            <div className="text-4xl font-bold text-brand-primary">24</div>
-                            <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">Gouvernorats couverts</div>
-                        </div>
+                <section aria-labelledby="fiche">
+                    <h2 id="fiche" className="display text-[1.9rem] md:text-[2.3rem] mb-6">Fiche de l’entreprise</h2>
+                    <dl className="bg-white border border-rule">
+                        {facts.map((f) => (
+                            <div key={f.k} className="grid grid-cols-[9rem_1fr] gap-4 border-b border-rule last:border-b-0 px-5 py-3.5">
+                                <dt className="text-sm text-muted pt-0.5">{f.k}</dt>
+                                <dd className="font-medium break-words">{f.v}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </section>
+            </div>
+
+            <section className="bg-white border-y border-rule" aria-labelledby="engagements">
+                <div className="wrap py-16 md:py-24">
+                    <h2 id="engagements" className="display text-[2.3rem] md:text-[3.2rem] mb-12">Nos engagements</h2>
+                    <div className="grid gap-px bg-rule border border-rule md:grid-cols-3">
+                        {commitments.map((c) => (
+                            <div key={c.title} className="bg-white p-7">
+                                <h3 className="text-xl font-semibold">{c.title}</h3>
+                                <p className="mt-3 text-muted leading-relaxed">{c.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </motion.section>
-
-            {/* Services & Competences - Staggered Grid */}
-            <section className="container mx-auto px-4 md:px-6 mb-20">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: true }}
-                        className="space-y-10"
-                    >
-                        <motion.div variants={itemVariants}>
-                            <h2 className="text-3xl font-bold font-heading text-slate-900 mb-4">Nos Compétences et Notre Engagement</h2>
-                            <p className="text-gray-600 text-lg leading-relaxed">
-                                Plus qu’un simple transitaire, Nas-Trans agit comme un véritable prolongement de votre entreprise. Nous anticipons les défis réglementaires pour fluidifier vos échanges.
-                            </p>
-                        </motion.div>
-
-                        <div className="space-y-6">
-                            {[
-                                {
-                                    icon: ShieldCheckIcon,
-                                    title: "Efficacité et Fiabilité",
-                                    desc: "Une maîtrise totale des procédures douanières pour sécuriser vos marchandises de l’import à l’export, sans surprise ni retard."
-                                },
-                                {
-                                    icon: TruckIcon,
-                                    title: "Rapidité de Traitement",
-                                    desc: "Des processus optimisés et une équipe réactive pour réduire vos délais de dédouanement et accélérer votre chaîne logistique."
-                                },
-                                {
-                                    icon: DocumentTextIcon,
-                                    title: "Gestion Complète",
-                                    desc: "Prise en charge intégrale : régimes suspensifs, admission temporaire, et toutes formalités administratives complexes."
-                                }
-                            ].map((val, i) => (
-                                <motion.div
-                                    key={i}
-                                    variants={itemVariants}
-                                    whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
-                                    className="flex gap-5 p-6 rounded-2xl bg-white/50 border border-slate-100 shadow-sm transition-all cursor-default"
-                                >
-                                    <div className="w-14 h-14 rounded-xl bg-blue-600/5 flex items-center justify-center shrink-0">
-                                        <val.icon className="w-7 h-7 text-brand-primary" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-bold text-xl mb-2 text-slate-900">{val.title}</h3>
-                                        <p className="text-gray-600 leading-relaxed">{val.desc}</p>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    {/* Visual Element */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="relative min-h-[420px] md:h-full w-full rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 to-blue-900 shadow-2xl"
-                    >
-                        <div className="absolute top-[-20%] right-[-20%] w-[500px] h-[500px] rounded-full bg-blue-500/20 blur-[100px] animate-pulse-slow" aria-hidden="true"></div>
-                        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-indigo-500/20 blur-[80px]"></div>
-
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center text-white space-y-8">
-                            <CubeTransparentIcon className="w-24 h-24 text-blue-400 opacity-80" aria-hidden="true" />
-                            <div>
-                                <h2 className="text-3xl font-bold mb-2">Partenaire de confiance</h2>
-                                <p className="text-blue-200">Pour les leaders de l’industrie tunisienne</p>
-                            </div>
-                            <ButtonLink href="/contact" variant="white" size="lg">Travaillons ensemble</ButtonLink>
-                        </div>
-                    </motion.div>
-                </div>
             </section>
-        </div>
+
+            <ContactBand title="Travaillons ensemble" />
+        </>
     );
 }

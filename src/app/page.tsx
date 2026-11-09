@@ -1,182 +1,148 @@
-"use client";
-
-import { ButtonLink } from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import { motion } from "framer-motion";
-import { ArrowRightIcon, GlobeAmericasIcon, TruckIcon, ShieldCheckIcon, DocumentTextIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { services, site, yearsOfExperience } from "@/lib/site";
+import Tick from "@/components/ui/Tick";
+import { PhoneIcon } from "@heroicons/react/24/outline";
+import { ButtonLink } from "@/components/ui/Button";
+import DeclarationSheet from "@/components/sections/DeclarationSheet";
+import FaqList from "@/components/sections/FaqList";
+import ContactBand from "@/components/sections/ContactBand";
+import JsonLd from "@/components/ui/JsonLd";
+import { faqSchema } from "@/lib/schema";
+import { services, site, steps, documents, generalFaqs, yearsOfExperience } from "@/lib/site";
 
-const featureStyles = [
-    { icon: ShieldCheckIcon, color: "text-brand-primary", bgColor: "bg-blue-50" },
-    { icon: GlobeAmericasIcon, color: "text-brand-secondary", bgColor: "bg-slate-100" },
-    { icon: TruckIcon, color: "text-brand-accent", bgColor: "bg-amber-50" },
-    { icon: DocumentTextIcon, color: "text-green-600", bgColor: "bg-green-50" },
-];
+const homeFaqs = generalFaqs.slice(0, 4);
 
 export default function Home() {
     return (
-        <div className="flex flex-col gap-20 pb-20 overflow-hidden bg-slate-50">
+        <>
+            <JsonLd data={faqSchema(homeFaqs)} />
+
             {/* Hero */}
-            <section className="relative min-h-[90vh] flex items-center pt-24">
-                <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-                    <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100/50 rounded-full blur-[120px] opacity-60" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-slate-200/50 rounded-full blur-[100px] opacity-40" />
-                </div>
-
-                <div className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="space-y-6"
-                    >
-                        <p className="inline-block px-4 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-brand-primary text-sm font-bold tracking-wider uppercase">
-                            Douane & Transit · Tunis
-                        </p>
-                        <h1 className="text-5xl md:text-7xl font-bold font-heading leading-tight text-slate-900">
-                            Nas-Trans <br />
-                            <span className="text-brand-primary">Tunisie SARL</span>
+            <section className="border-b border-rule">
+                <div className="wrap grid gap-14 py-14 md:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+                    <div>
+                        <h1 className="display text-ink text-[2.55rem] sm:text-[3.6rem] lg:text-[4.6rem] max-w-[13ch]">
+                            Commissionnaire en douane à Tunis depuis {site.foundingYear}
                         </h1>
-                        <p className="text-gray-600 text-lg md:text-xl max-w-lg leading-relaxed">
-                            Votre partenaire de confiance pour toutes les formalités douanières et de commerce extérieur.
-                            Efficacité, fiabilité et rapidité sur tout le territoire tunisien.
+                        <p className="mt-7 max-w-[52ch] text-lg md:text-xl text-muted leading-relaxed">
+                            Nas-Trans prend en charge vos formalités douanières, vos opérations de commerce extérieur et
+                            l’acheminement de vos marchandises jusqu’à vos locaux, partout en Tunisie.
                         </p>
-                        <div className="flex flex-wrap gap-4 pt-4">
-                            <ButtonLink href="/services" size="lg" className="group shadow-lg shadow-blue-500/20">
-                                Nos Services
-                                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </ButtonLink>
-                            <ButtonLink href="/contact" variant="outline" size="lg">
-                                Demander un Devis
-                            </ButtonLink>
-                        </div>
-
-                        <div className="pt-8 flex flex-wrap items-center gap-8 text-sm text-gray-500 font-medium">
-                            <a href={site.phone.href} className="flex items-center gap-2 hover:text-brand-primary transition-colors">
-                                <PhoneIcon className="w-5 h-5 text-brand-primary" />
-                                <span>{site.phone.label}</span>
-                            </a>
-                            <div className="flex items-center gap-2">
-                                <span className="text-brand-primary text-xl font-bold">{yearsOfExperience}+</span>
-                                <span>ans d’expérience</span>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative h-[360px] md:h-[500px] flex items-center justify-center"
-                        aria-hidden="true"
-                    >
-                        <div className="relative w-full h-full max-w-md mx-auto">
-                            <div className="absolute inset-0 border border-slate-200 rounded-full animate-[spin_30s_linear_infinite]" />
-                            <div className="absolute inset-8 border border-dashed border-slate-300 rounded-full animate-[spin_40s_linear_infinite_reverse]" />
-                            <div className="absolute inset-[20%] bg-white rounded-full shadow-2xl flex items-center justify-center">
-                                <GlobeAmericasIcon className="w-32 h-32 md:w-48 md:h-48 text-brand-primary relative z-10" />
-                            </div>
-
-                            <motion.div
-                                animate={{ y: [-10, 10, -10] }}
-                                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                                className="absolute top-10 right-0 bg-white p-4 rounded-xl shadow-xl flex items-center gap-3 border border-slate-100"
-                            >
-                                <div className="bg-blue-50 p-2 rounded-lg">
-                                    <TruckIcon className="w-6 h-6 text-brand-primary" />
-                                </div>
-                                <div>
-                                    <div className="text-xs text-gray-400 font-medium">Statut</div>
-                                    <div className="text-sm font-bold text-slate-900">Dédouané</div>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                animate={{ y: [10, -10, 10] }}
-                                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                                className="absolute bottom-20 left-0 bg-white p-4 rounded-xl shadow-xl flex items-center gap-3 border border-slate-100"
-                            >
-                                <div className="bg-indigo-50 p-2 rounded-lg">
-                                    <ShieldCheckIcon className="w-6 h-6 text-indigo-600" />
-                                </div>
-                                <div>
-                                    <div className="text-xs text-gray-400 font-medium">Depuis</div>
-                                    <div className="text-sm font-bold text-slate-900">{site.foundingYear}</div>
-                                </div>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Pourquoi nous */}
-            <section className="container mx-auto px-4 md:px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16 space-y-4"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-900">Pourquoi choisir Nas-Trans ?</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        Une expertise reconnue depuis {site.foundingYear} dans le dédouanement et le transit international.
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.15 } } }}
-                    className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
-                >
-                    {services.map((service, index) => {
-                        const style = featureStyles[index % featureStyles.length];
-                        return (
-                            <motion.div key={service.id} variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}>
-                                <Link href={`/services#${service.id}`} className="block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary">
-                                    <Card className="group h-full">
-                                        <div className={`w-14 h-14 rounded-xl ${style.bgColor} flex items-center justify-center mb-6`}>
-                                            <style.icon className={`w-8 h-8 ${style.color}`} aria-hidden="true" />
-                                        </div>
-                                        <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-brand-primary transition-colors">{service.title}</h3>
-                                        <p className="text-gray-600 leading-relaxed text-sm">{service.short}</p>
-                                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-primary">
-                                            En savoir plus <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </span>
-                                    </Card>
-                                </Link>
-                            </motion.div>
-                        );
-                    })}
-                </motion.div>
-            </section>
-
-            {/* CTA */}
-            <section className="container mx-auto px-4 md:px-6 py-10">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="relative rounded-3xl overflow-hidden text-white p-8 md:p-12 text-center shadow-2xl bg-gradient-to-br from-brand-primary to-blue-700"
-                >
-                    <div className="relative z-10 space-y-6">
-                        <h2 className="text-3xl md:text-5xl font-bold font-heading">Besoin d’un devis ?</h2>
-                        <p className="text-blue-100 max-w-xl mx-auto text-lg">
-                            Contactez-nous pour une estimation rapide ou pour discuter de vos besoins en dédouanement et logistique.
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <ButtonLink href="/contact" size="lg" variant="white">Contactez-nous</ButtonLink>
-                            <a href={site.phone.href} className="inline-flex items-center justify-center gap-2 rounded-md px-8 py-3 text-lg font-bold border-2 border-white text-white hover:bg-white/10 transition-colors">
-                                <PhoneIcon className="w-5 h-5" /> Appeler
+                        <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+                            <ButtonLink href="/contact" size="lg">Demander un devis</ButtonLink>
+                            <a href={site.phone.href} className="inline-flex items-center gap-2 font-semibold text-ink hover:text-marine">
+                                <PhoneIcon className="w-5 h-5" aria-hidden="true" />
+                                {site.phone.label}
                             </a>
                         </div>
                     </div>
-                </motion.div>
+                    <div className="max-w-xl w-full lg:justify-self-end">
+                        <DeclarationSheet />
+                    </div>
+                </div>
+
+                {/* Faits clés, présentés comme des cases de formulaire */}
+                <div className="wrap">
+                    <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-rule border-t border-rule">
+                        {[
+                            { k: "Expérience", v: `${yearsOfExperience} ans, depuis ${site.foundingYear}` },
+                            { k: "Bureaux", v: `${site.address.city}, centre-ville` },
+                            { k: "Zone d’intervention", v: "Toute la Tunisie" },
+                            { k: "Opérations", v: "Import, export, régimes suspensifs" },
+                        ].map((f) => (
+                            <div key={f.k} className="bg-paper py-5 pr-4 [&:nth-child(even)]:pl-5 lg:[&:not(:first-child)]:pl-5">
+                                <dt className="text-sm text-muted">{f.k}</dt>
+                                <dd className="mt-1 font-semibold text-ink">{f.v}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
             </section>
-        </div>
+
+            {/* Services */}
+            <section className="wrap py-20 md:py-28" aria-labelledby="services-titre">
+                <div className="grid gap-6 md:grid-cols-[1fr_1.4fr] md:items-end mb-12">
+                    <h2 id="services-titre" className="display text-[2.3rem] md:text-[3.2rem] max-w-[14ch]">
+                        Ce que nous prenons en charge
+                    </h2>
+                    <p className="text-muted max-w-[52ch] md:justify-self-end">
+                        De la déclaration en douane à la livraison, un seul interlocuteur suit votre dossier.
+                    </p>
+                </div>
+                <ul className="border-t-2 border-ink">
+                    {services.map((s) => (
+                        <li key={s.id} className="border-b border-rule">
+                            <Link
+                                href={`/services/${s.id}`}
+                                className="group grid gap-3 py-7 md:grid-cols-[1fr_1.5fr_auto] md:gap-10 md:items-baseline"
+                            >
+                                <h3 className="display text-[1.6rem] md:text-[1.9rem] text-ink group-hover:text-marine transition-colors">
+                                    {s.title}
+                                </h3>
+                                <p className="text-muted leading-relaxed max-w-[55ch]">{s.short}</p>
+                                <span className="text-sm font-semibold text-marine underline-offset-4 group-hover:underline whitespace-nowrap">
+                                    Voir le détail
+                                </span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* Déroulement : vraie séquence, donc numérotée */}
+            <section className="bg-white border-y border-rule" aria-labelledby="etapes-titre">
+                <div className="wrap py-20 md:py-28">
+                    <h2 id="etapes-titre" className="display text-[2.3rem] md:text-[3.2rem] max-w-[18ch] mb-14">
+                        Comment se déroule un dédouanement avec nous
+                    </h2>
+                    <ol className="grid gap-px bg-rule border border-rule md:grid-cols-2 lg:grid-cols-4">
+                        {steps.map((step, i) => (
+                            <li key={step.title} className="bg-white p-6 md:p-7">
+                                <span className="display block text-[2.6rem] text-stamp leading-none" aria-hidden="true">{i + 1}</span>
+                                <h3 className="mt-5 text-lg font-semibold text-ink">{step.title}</h3>
+                                <p className="mt-2 text-muted leading-relaxed">{step.desc}</p>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            </section>
+
+            {/* Documents */}
+            <section className="wrap py-20 md:py-28 grid gap-12 lg:grid-cols-[1fr_1.3fr]" aria-labelledby="documents-titre">
+                <div>
+                    <h2 id="documents-titre" className="display text-[2.3rem] md:text-[3.2rem] max-w-[14ch]">
+                        Les documents à préparer
+                    </h2>
+                    <p className="mt-5 text-muted max-w-[44ch] leading-relaxed">
+                        La liste exacte dépend de la marchandise et du régime. Envoyez-nous ce que vous avez : nous vous dirons ce qui manque.
+                    </p>
+                </div>
+                <ul className="border-t border-rule">
+                    {documents.map((d) => (
+                        <li key={d.name} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule py-4">
+                            <span className="flex items-baseline gap-3 font-medium text-ink">
+                                <Tick />
+                                {d.name}
+                            </span>
+                            {d.note && <span className="text-sm text-muted">{d.note}</span>}
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* FAQ */}
+            <section className="wrap pb-20 md:pb-28 grid gap-12 lg:grid-cols-[1fr_1.3fr]" aria-labelledby="faq-titre">
+                <div>
+                    <h2 id="faq-titre" className="display text-[2.3rem] md:text-[3.2rem] max-w-[12ch]">
+                        Questions fréquentes
+                    </h2>
+                    <Link href="/faq" className="mt-5 inline-block font-semibold text-marine underline underline-offset-4">
+                        Toutes les questions
+                    </Link>
+                </div>
+                <FaqList faqs={homeFaqs} />
+            </section>
+
+            <ContactBand />
+        </>
     );
 }

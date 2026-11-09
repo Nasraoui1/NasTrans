@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #0f172a; /* Slate 900 */
-  --color-brand-primary: #0056b3; /* Bleu professionnel */
-  --color-brand-secondary: #64748b; /* Slate 500 */
-  --color-brand-accent: #d97706; /* Amber 600 */
-  --color-brand-surface: #ffffff;
+  /* Palette « déclaration en douane » */
+  --color-ink: #13243a; /* encre : texte, sections sombres */
+  --color-marine: #0f4c81; /* bleu de la marque : liens, boutons */
+  --color-marine-dark: #0b3a63;
+  --color-stamp: #c23b2e; /* rouge tampon : usage rare */
+  --color-paper: #f2f4f1; /* papier de formulaire */
+  --color-rule: #cbd3d0; /* filets et cases */
+  --color-muted: #5a6878; /* texte secondaire */
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-outfit), sans-serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-plex), sans-serif;
+}
 
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+@utility wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Titres : Archivo semi-condensé */
+@utility display {
+  font-family: var(--font-display);
+  font-stretch: 82%;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
 }
 
 html {
   scroll-behavior: smooth;
-  /* Décale les ancres (#service) sous la barre de navigation fixe */
   scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   overflow-x: hidden;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-marine);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-marine);
+  color: #fff;
+}
+
+/* Le tampon « Dédouané » : le seul mouvement automatique du site */
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-9deg) scale(1.9);
+  }
+  60% {
+    opacity: 0.95;
+    transform: rotate(-9deg) scale(0.94);
+  }
+  100% {
+    opacity: 0.9;
+    transform: rotate(-9deg) scale(1);
+  }
+}
+
+.stamp {
+  animation: stamp 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.7s both;
+}
+
+/* Accordéons FAQ */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .faq-icon {
+  transform: rotate(45deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -32,25 +99,7 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* Barre de défilement */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
 }

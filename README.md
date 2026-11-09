@@ -1,6 +1,6 @@
 # Nas-Trans Tunisie – site vitrine
 
-Site de Nas-Trans Tunisie SARL (commissionnaire en douane et transitaire, Tunis). Next.js 16, React 19, Tailwind CSS 4, Framer Motion.
+Site de Nas-Trans Tunisie SARL (commissionnaire en douane et transitaire, Tunis). Next.js 16, React 19, Tailwind CSS 4. Hébergé sur Netlify : https://nas-trans.com
 
 ## Démarrage
 
@@ -24,7 +24,9 @@ Ouvrir http://localhost:3000.
 ## Structure
 
 - `src/lib/site.ts` : coordonnées de l'entreprise et liste des services (source unique, utilisée par toutes les pages, le pied de page et les données SEO).
-- `src/app/*` : pages (accueil, services, à propos, contact), `sitemap.ts`, `robots.ts`, page 404.
+- `src/lib/site.ts` contient aussi le contenu des services, la FAQ et la liste des documents.
+- `src/lib/schema.ts` : données structurées schema.org (organisation, services, FAQ, fil d'Ariane).
+- `src/app/*` : pages (accueil, services + une page par service, FAQ, à propos, contact), `sitemap.ts`, `robots.ts` (autorise les robots IA), `llms.txt`, image Open Graph, icônes, page 404.
 - `src/app/api/contact/route.ts` : envoi des emails du formulaire (validation, anti-spam, limitation de débit).
 
 ## Scripts

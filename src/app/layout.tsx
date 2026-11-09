@@ -1,27 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Archivo, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
-import Providers from "@/components/providers";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/ui/JsonLd";
+import { organizationSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-archivo" });
+const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-plex" });
+
+const defaultTitle = "Nas-Trans | Commissionnaire en douane et transitaire à Tunis";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | Douane & Transit en Tunisie`,
-    template: `%s | ${site.shortName}`,
-  },
+  title: { default: defaultTitle, template: `%s | ${site.shortName}` },
   description: site.description,
+  applicationName: site.shortName,
   keywords: [
-    "transitaire Tunis",
-    "commissionnaire en douane",
+    "commissionnaire en douane Tunis",
+    "transitaire Tunisie",
     "dédouanement Tunisie",
     "formalités douanières",
-    "commerce extérieur",
+    "commerce extérieur Tunisie",
+    "admission temporaire",
     "import export Tunisie",
   ],
   alternates: { canonical: "/" },
@@ -29,62 +31,31 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_TN",
     siteName: site.name,
-    title: `${site.name} | Douane & Transit en Tunisie`,
+    title: defaultTitle,
     description: site.description,
     url: "/",
   },
-  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image", title: defaultTitle, description: site.description },
+  robots: { index: true, follow: true, googleBot: { "max-image-preview": "large", "max-snippet": -1 } },
+  formatDetection: { telephone: true, email: true, address: true },
 };
 
-export const viewport: Viewport = {
-  themeColor: "#0056b3",
-};
+export const viewport: Viewport = { themeColor: "#f2f4f1" };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: site.name,
-  description: site.description,
-  url: site.url,
-  telephone: "+21671256462",
-  faxNumber: "+21671256462",
-  email: site.emails[0],
-  foundingDate: String(site.foundingYear),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    postalCode: site.address.postalCode,
-    addressCountry: site.address.country,
-  },
-  areaServed: { "@type": "Country", name: "Tunisie" },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-slate-50 text-slate-800 selection:bg-brand-primary selection:text-white`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <html lang="fr-TN" className={`${archivo.variable} ${plex.variable}`}>
+      <body className="font-sans antialiased bg-paper text-ink">
+        <JsonLd data={organizationSchema()} />
         <a
           href="#contenu"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg text-brand-primary font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 font-semibold text-marine"
         >
           Aller au contenu
         </a>
-        <Providers>
-          <Navbar />
-          <main id="contenu" className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-        </Providers>
+        <Navbar />
+        <main id="contenu">{children}</main>
+        <Footer />
       </body>
     </html>
   );
