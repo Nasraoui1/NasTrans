@@ -2,7 +2,7 @@ import Link from "next/link";
 import Tick from "@/components/ui/Tick";
 import { PhoneIcon } from "@heroicons/react/24/outline";
 import { ButtonLink } from "@/components/ui/Button";
-import DeclarationSheet from "@/components/sections/DeclarationSheet";
+import HeroContactCard from "@/components/sections/HeroContactCard";
 import FaqList from "@/components/sections/FaqList";
 import ContactBand from "@/components/sections/ContactBand";
 import JsonLd from "@/components/ui/JsonLd";
@@ -36,7 +36,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="max-w-xl w-full lg:justify-self-end">
-                        <DeclarationSheet />
+                        <HeroContactCard />
                     </div>
                 </div>
 
